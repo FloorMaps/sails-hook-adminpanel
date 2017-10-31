@@ -7,6 +7,10 @@ mkdir vendor
 cp -r bower_components/ckeditor vendor
 cp -r bower_components/jquery vendor
 cp -r bower_components/webcomponentsjs vendor
+cp -r bower_components/leaflet vendor
+cp -r bower_components/floormaps vendor
+cp -r bower_components/jsoneditor vendor
+
 
 cd polymer
 rm elements-vulcanized.html

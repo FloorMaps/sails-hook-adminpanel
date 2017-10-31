@@ -37,7 +37,7 @@ mixin fieldWidget(key, field, value, instance)
       when 'longtext'
         +textarea(key, field, value)
       when 'json'
-        +textarea(key, field, JSON.stringify(value))
+        +json(key, field, value)
       when 'array'
         +textarea(key, field, value)
       default
@@ -88,6 +88,30 @@ mixin textarea(key, field, value)
   else
     paper-textarea(name=key, value=value, label=field.config.title, id='form-#{key}', required=field.config.required || false, disabled=field.config.disabled || false)
 
+// FloorMaps inject
+
+mixin json(key, field, value)
+  if field.config.map
+    | &nbsp;#{field.config.title}
+    
+    br
+    <div id="map" class="map"></div>
+  else if field.config.FloorMap
+    h4 FloorMap 
+  else if field.config.FloorMapDraw
+    h4 FloorMapDraw 
+  else if field.config.JsonEditor
+    h4 JsonEditor
+    textarea(name=key, id='JsonEditor-#{key}', required=field.config.required || false, disabled=field.config.disabled || false) #{value}
+
+
+
+///////////////////
+
+
+
+
+
 mixin inputModel(key, field, value)
   .widget
     | &nbsp;#{field.config.title}&nbsp;
@@ -131,3 +155,9 @@ mixin installEditors(fields, record)
           |   },
           |   !{typeof value === 'object' ? JSON.stringify(value) : JSON.parse(JSON.stringify(value))}
           | );
+      else if field.config.JsonEditor
+        if field.config.type == 'json'
+           | var container = document.getElementById('JsonEditor-#{key}');
+           | var options = {};
+           | var editor = new JSONEditor(container, options);
+        

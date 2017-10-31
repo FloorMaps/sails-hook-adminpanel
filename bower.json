@@ -37,7 +37,10 @@
     "paper-toast": "PolymerElements/paper-toast#^1.0.0",
     "paper-toolbar": "PolymerElements/paper-toolbar#^1.0.0",
     "jquery": "~2.1.4",
-    "jsoneditor": "^5.5.8"
+    "jsoneditor": "^5.5.8",
+    "leaflet": "^1.2.0",
+    "Leaflet-FloorMaps": "http://git.42team.ru/FloorMaps/Leaflet-FloorMaps",
+    "floormaps": "http://git.42team.ru/navigation/floormaps"
   },
   "resolutions": {
     "polymer": "^1.6.0"

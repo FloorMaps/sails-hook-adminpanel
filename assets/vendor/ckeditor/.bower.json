@@ -21,7 +21,7 @@
     "tag": "4.4.8",
     "commit": "a68e8c32012f2955b76e0d2e84f1b14a90c8c959"
   },
-  "_source": "git://github.com/ckeditor/ckeditor-releases.git",
+  "_source": "https://github.com/ckeditor/ckeditor-releases.git",
   "_target": "~4.4.7",
   "_originalSource": "ckeditor"
 }
