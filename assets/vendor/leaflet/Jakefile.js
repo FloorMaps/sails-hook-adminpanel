@@ -12,9 +12,9 @@ To run the tests, run "jake test". To build the documentation, run "jake docs".
 For a custom build, open build/build.html in the browser and follow the instructions.
 */
 
-var buildDocs = require('./build/docs'),
-    git = require('git-rev-sync'),
-    path = require('path');
+var build = require('./build/build.js'),
+    buildDocs = require('./build/docs'),
+    git = require('git-rev');
 
 function hint(msg, args) {
 	return function () {
@@ -29,14 +29,16 @@ function hint(msg, args) {
 
 // Returns the version string in package.json, plus a semver build metadata if
 // this is not an official release
-function calculateVersion(officialRelease) {
+function calculateVersion(officialRelease, callback) {
 
 	var version = require('./package.json').version;
 
 	if (officialRelease) {
-		return version;
+		callback(version);
 	} else {
-		return version + '+' + git.short();
+		git.short(function(str) {
+			callback (version + '+' + str);
+		});
 	}
 }
 
@@ -46,53 +48,16 @@ task('lint', {async: true}, hint('Checking for JS errors...', 'src'));
 desc('Check Leaflet specs source for errors with ESLint');
 task('lintspec', {async: true}, hint('Checking for specs JS errors...', 'spec/suites'));
 
+desc('Combine and compress Leaflet source files');
+task('build', {async: true}, function (compsBase32, buildName, officialRelease) {
+	calculateVersion(officialRelease, function(v){
+		build.build(complete, v, compsBase32, buildName);
+	});
+});
+
 desc('Run PhantomJS tests');
 task('test', ['lint', 'lintspec'], {async: true}, function () {
-
-	var karma = require('karma'),
-	 testConfig = {configFile : path.join(__dirname, './spec/karma.conf.js')};
-
-	 testConfig.browsers = ['PhantomJSCustom'];
-
-	 function isArgv(optName) {
-		 return process.argv.indexOf(optName) !== -1;
-	 }
-
-	 if (isArgv('--chrome')) {
-		 testConfig.browsers.push('Chrome');
-	 }
-	 if (isArgv('--safari')) {
-		 testConfig.browsers.push('Safari');
-	 }
-	 if (isArgv('--ff')) {
-		 testConfig.browsers.push('Firefox');
-	 }
-	 if (isArgv('--ie')) {
-		 testConfig.browsers.push('IE');
-	 }
-
-	 if (isArgv('--cov')) {
-		 testConfig.preprocessors = {
-			 'src/**/*.js': 'coverage'
-		 };
-		 testConfig.coverageReporter = {
-			 type : 'html',
-	 dir : 'coverage/'
-		 };
-		 testConfig.reporters = ['coverage'];
-	 }
-
-	 console.log('Running tests...');
-
-	 var server = new karma.Server(testConfig, function(exitCode) {
-		 if (!exitCode) {
-			 console.log('\tTests ran successfully.\n');
-			 complete();
-		 } else {
-			 process.exit(exitCode);
-		 }
-	 });
-	 server.start();
+	build.test(complete);
 });
 
 desc('Build documentation');
