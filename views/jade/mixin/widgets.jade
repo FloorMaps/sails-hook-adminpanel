@@ -67,8 +67,9 @@ mixin inputNumber(key, field, value)
 
 mixin inputCheckbox(key, field, value)
   .widget
-    paper-checkbox(type='checkbox', name=key, id='form-#{key}', required=field.config.required || false, disabled=field.config.disabled || false value='1', checked=value) #{field.config.title}
-
+     | <input type="checkbox" id="form-#{key}" name="#{key}" checked=#{value}>
+//-  paper-checkbox(type='checkbox', name=key, id='form-#{key}', required=field.config.required || false, disabled=field.config.disabled || false value='1', checked=value) #{field.config.title}
+  
 mixin select(key, field, value)
   .widget
     | &nbsp;#{field.config.title}&nbsp;
@@ -101,14 +102,19 @@ mixin json(key, field, value)
         | &nbsp;#{field.config.title}
         br
         | <div id="Map-#{key}" class="map"></div>
-      when 'JsonEditor'
-        h4 JsonEditor
-        textarea(name=key, id='JsonEditor-#{key}', required=field.config.required || false, disabled=field.config.disabled || false) #{value}
-
-///////////////////
-
-
-
+      when 'JsonEditor' 
+        h4 #{field.config.title}
+        br
+        textarea(name=key, id='form-#{key}', required=field.config.required || false, disabled=field.config.disabled || false) #{value}
+      when 'Ace'
+        | &nbsp;#{field.config.title}
+        br
+        | <div id="ace-#{key}" style="height: #{field.config.Ace.height}px; font-size: #{field.config.Ace.fontSize}px;">#{value}</div>
+        textarea(name=key, id='form-#{key}', required=field.config.required || false, disabled=field.config.disabled || false) #{value} 
+        style
+          | #form-#{key} {
+          |   display: none;          
+          | }
 
 
 mixin inputModel(key, field, value)
@@ -158,7 +164,22 @@ mixin installEditors(fields, record)
         when 'FloorMapDraw'
           | <test>!!FM!!</test>
         when 'JsonEditor'
-          | var container = document.getElementById('JsonEditor-#{key}');
-          | var options = {};
-          | var editor = new JSONEditor(container, options);   
+          - var value = record ? locals.adminpanel.viewHelper.getFieldValue(key, field, record) : {};
+          | $('#form-#{key}').hide().after('<div id="form-#{key}-jsoneditor" style="height:#{field.config.JsonEditor.height}px;"></div>');
+          | jsonEditor['#{key}'] = new JSONEditor(
+          |   $('#form-#{key}-jsoneditor')[0],
+          |   {
+          |     modes: ['view', 'tree', 'code']
+          |   },
+          |   !{typeof value === 'object' ? JSON.stringify(value) : JSON.parse(JSON.stringify(value))}
+          | );
+        when 'Ace'
+          | var editor = ace.edit('ace-#{key}');
+          | editor.setReadonly
+          | editor.setTheme("ace/theme/katzenmilch");
+          | editor.getSession().setMode("ace/mode/html");
+          | var textarea = $('textarea[name="#{key}"]');
+          | editor.getSession().on("change", function () {
+          |    textarea.val(editor.getSession().getValue());
+          | });
 

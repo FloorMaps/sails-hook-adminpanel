@@ -20,40 +20,43 @@
         }
       },
       "/prj/tdc-gostiniydvor"
+    ],
+    [
+      {
+        "raw": "git+http://git.42team.ru/SailsJS/sails-hook-adminpanel",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "git+http://git.42team.ru/SailsJS/sails-hook-adminpanel",
+        "spec": "http://git.42team.ru/SailsJS/sails-hook-adminpanel",
+        "type": "git"
+      },
+      "/prj/kinza.hm"
     ]
   ],
-  "_from": "git+https://github.com/FloorMaps/sails-hook-adminpanel.git",
+  "_from": "git+http://git.42team.ru/SailsJS/sails-hook-adminpanel",
   "_id": "sails-hook-adminpanel@1.0.15",
   "_inCache": true,
   "_location": "/sails-hook-adminpanel",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "git+https://github.com/FloorMaps/sails-hook-adminpanel.git",
+    "raw": "git+http://git.42team.ru/SailsJS/sails-hook-adminpanel",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "git+https://github.com/FloorMaps/sails-hook-adminpanel.git",
-    "spec": "git+https://github.com/FloorMaps/sails-hook-adminpanel.git",
-    "type": "hosted",
-    "hosted": {
-      "type": "github",
-      "ssh": "git@github.com:FloorMaps/sails-hook-adminpanel.git",
-      "sshUrl": "git+ssh://git@github.com/FloorMaps/sails-hook-adminpanel.git",
-      "httpsUrl": "git+https://github.com/FloorMaps/sails-hook-adminpanel.git",
-      "gitUrl": "git://github.com/FloorMaps/sails-hook-adminpanel.git",
-      "shortcut": "github:FloorMaps/sails-hook-adminpanel",
-      "directUrl": "https://raw.githubusercontent.com/FloorMaps/sails-hook-adminpanel/master/package.json"
-    }
+    "rawSpec": "git+http://git.42team.ru/SailsJS/sails-hook-adminpanel",
+    "spec": "http://git.42team.ru/SailsJS/sails-hook-adminpanel",
+    "type": "git"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://github.com/FloorMaps/sails-hook-adminpanel.git#3633322ed8356584330f49f14b5755412bf1d56a",
-  "_shasum": "a1b17a35465b83b88ecafb1957efbd459d2b2c42",
+  "_resolved": "git+http://git.42team.ru/SailsJS/sails-hook-adminpanel#fcf4bb661c8f1b37ff8b8ec64b91230ea7987aec",
+  "_shasum": "2548b3abcf71a79a6f2dc2f3ddc0b4fc1ff0fead",
   "_shrinkwrap": null,
-  "_spec": "git+https://github.com/FloorMaps/sails-hook-adminpanel.git",
-  "_where": "/prj/tdc-gostiniydvor",
+  "_spec": "git+http://git.42team.ru/SailsJS/sails-hook-adminpanel",
+  "_where": "/prj/kinza.hm",
   "author": {
     "name": "Konstantin Zolotarev"
   },

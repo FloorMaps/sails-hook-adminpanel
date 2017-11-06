@@ -68,6 +68,5 @@
   },
   "_source": "https://github.com/Leaflet/Leaflet.draw.git",
   "_target": "^0.4.12",
-  "_originalSource": "leaflet-draw",
-  "_direct": true
+  "_originalSource": "leaflet-draw"
 }

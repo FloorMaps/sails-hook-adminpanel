@@ -41,7 +41,9 @@
     "leaflet": "^1.2.0",
     "Leaflet-FloorMaps": "http://git.42team.ru/FloorMaps/Leaflet-FloorMaps",
     "floormaps": "http://git.42team.ru/navigation/floormaps",
-    "leaflet-draw": "^0.4.12"
+    "leaflet-draw": "^0.4.12",
+    "blueimp-file-upload": "jQuery-File-Upload#^9.19.1",
+    "ace": "https://github.com/ajaxorg/ace-builds.git#ba3b91e04a5aa559d56ac70964f9054baa0f4caf"
   },
   "resolutions": {
     "polymer": "^1.6.0"
